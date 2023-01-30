@@ -1,0 +1,49 @@
+{% extends "contacts/layout/base.html" %} 
+{% load static %}
+{% block title %}Contactos Registrados{% endblock %}
+{% block header %}
+    {% include "contacts/partials/menu.html" %}
+{% endblock %}
+{% block content %}    
+    <div class="container-fluid d-flex flex-column" style="height: 85vh;">
+        <div class="container-fluid bg-light d-flex flex-row-reverse justify-content-between mb-3 p-2 rounded">
+            <a class="btn btn-light" href="#"><i class="bi bi-plus-circle-fill"></i> Nuevo</a>
+            <p>Contactos Guardados: <b>{{contacts|length}}</b></p>
+        </div>
+        <div class="table-responsive">            
+            <table class="table-sm table-hover">
+                <thead>
+                    <th>#</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Dirección</th>
+                    <th>Telefono</th>
+                    <th>Correo</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Genero</th>
+                    <th>Creación</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    {% for contact in contacts %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{contact.first_name}}</td>
+                            <td>{{contact.last_name}}</td>
+                            <td>{{contact.address}}</td>
+                            <td>{{contact.phone_number}}</td>
+                            <td>{{contact.email}}</td>
+                            <td>{{contact.birthday_date}}</td>
+                            <td>{{contact.get_genre_display}}</td>
+                            <td>{{contact.create_at}}</td>
+                            <td><div class="container d-flex gap-3">
+                                <a class="btn btn-light" href="#"><i class="bi bi-pencil-square"></i> Editar</a>
+                                <a class="btn btn-light" href="#"><i class="bi bi-trash-fill"></i> Eliminar</a>
+                            </div></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
